@@ -16,9 +16,9 @@ class Tweet(models.Model):
 
 
 class Like(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
     tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
-    likes = models.IntegerField(blank=True, null=True)
+    likes = models.BooleanField(default=False)
 
     def __str__(self):
         return self.owner.username
