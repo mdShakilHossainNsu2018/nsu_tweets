@@ -5,7 +5,7 @@ User = get_user_model()
 
 
 class Tweet(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='tweets', on_delete=models.CASCADE)
     tweet = models.TextField()
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -16,7 +16,7 @@ class Tweet(models.Model):
 
 
 class Like(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField(User, related_name='likes', on_delete=models.CASCADE)
     tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
     likes = models.BooleanField(default=False)
 
@@ -25,7 +25,7 @@ class Like(models.Model):
 
 
 class ReTweet(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='re_tweets', on_delete=models.CASCADE)
     base_tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
     tweet = models.TextField()
     image = models.ImageField(upload_to='images/', blank=True, null=True)

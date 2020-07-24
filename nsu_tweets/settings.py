@@ -38,10 +38,21 @@ INSTALLED_APPS = [
 
     # todo disable it before the production
     'corsheaders',
+'rest_framework.authtoken',
 
     'rest_framework',
     'tweets',
+    'accounts',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
+
+# CSRF_COOKIE_NAME = "csrftoken"
 
 # todo disable it before the production
 # enabling cors origin

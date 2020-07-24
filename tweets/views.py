@@ -3,9 +3,11 @@ from .serializers import TweetSerializer, LikeSerializer
 from rest_framework import generics
 from .models import Tweet, Like
 from rest_framework import permissions
+from rest_framework.parsers import FileUploadParser
 
 
 class TweetApiView(generics.ListCreateAPIView):
+    # parser_classes = (FileUploadParser,)
     serializer_class = TweetSerializer
     queryset = Tweet.objects.all()
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
